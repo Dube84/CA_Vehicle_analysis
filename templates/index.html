@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page_title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="layout">
+      <header class="hero">
+        <h1>{{ page_title }}</h1>
+        <p class="subtitle">Trend dashboard for fuel economy, engine size, and body style.</p>
+        <div class="meta-grid">
+          <article class="meta-card">
+            <h2>Dataset</h2>
+            <p>{{ dataset_name }}</p>
+          </article>
+          <article class="meta-card">
+            <h2>Sample Size</h2>
+            <p>{{ rows }} rows</p>
+          </article>
+          <article class="meta-card">
+            <h2>Year Range</h2>
+            <p>{{ year_min }} to {{ year_max }}</p>
+          </article>
+        </div>
+      </header>
+
+      <section class="notes">
+        <h2>Scope Clarifications</h2>
+        <ul>
+          {% for note in notes %}
+          <li>{{ note }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>Fuel Economy Change Over Years</h2>
+        <p>
+          Average combined fuel economy changed from
+          <strong>{{ "%.2f"|format(fuel_details.start_value) }}</strong> MPG in {{ fuel_details.start_year }}
+          to <strong>{{ "%.2f"|format(fuel_details.end_value) }}</strong> MPG in {{ fuel_details.end_year }}.
+        </p>
+        <img src="data:image/png;base64,{{ fuel_chart }}" alt="Fuel economy trend chart" />
+      </section>
+
+      <section class="panel">
+        <h2>Engine Size Change Over Years</h2>
+        <p>
+          Average engine displacement moved from
+          <strong>{{ "%.2f"|format(engine_details.start_value) }}</strong>L in {{ engine_details.start_year }}
+          to <strong>{{ "%.2f"|format(engine_details.end_value) }}</strong>L in {{ engine_details.end_year }}.
+        </p>
+        <img src="data:image/png;base64,{{ engine_chart }}" alt="Engine size trend chart" />
+      </section>
+
+      <section class="panel">
+        <h2>Body Style Mix Over Years</h2>
+        <p>
+          In {{ body_details.latest_year }}, the leading body style among the top tracked groups is
+          <strong>{{ body_details.leading_style }}</strong>.
+        </p>
+        <img src="data:image/png;base64,{{ body_chart }}" alt="Body style share by year chart" />
+      </section>
+
+      <section class="panel">
+        <h2>Body Style Engine Displacement Trends</h2>
+        <p>
+          This chart tracks average engine displacement over time for the largest body-style groups:
+          <strong>{{ body_displ_details.tracked_styles }}</strong>.
+          In {{ body_displ_details.latest_year }}, the highest average displacement among these lines is
+          <strong>{{ body_displ_details.highest_style }}</strong>.
+        </p>
+        <img src="data:image/png;base64,{{ body_displ_chart }}" alt="Body style displacement trend lines" />
+      </section>
+
+      <section class="panel">
+        <h2>Five-Year Snapshots</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Avg Combined MPG</th>
+              <th>Avg Engine Size (L)</th>
+              <th>Top Body Style</th>
+              <th>Rows</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in snapshots %}
+            <tr>
+              <td>{{ row.year }}</td>
+              <td>{{ row.avg_mpg }}</td>
+              <td>{{ row.avg_displ }}</td>
+              <td>{{ row.top_style }}</td>
+              <td>{{ row.sample }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>

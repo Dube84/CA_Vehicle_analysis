@@ -1,0 +1,119 @@
+:root {
+  --ink: #18222d;
+  --paper: #f7f8f4;
+  --accent: #0f766e;
+  --accent-soft: #d4eeea;
+  --line: #d3dbde;
+  --card: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top right, #ebf6f4, var(--paper) 45%);
+}
+
+.layout {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: 0.01em;
+}
+
+.subtitle {
+  margin: 0.5rem 0 1.5rem;
+  color: #3b4f5f;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.meta-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+}
+
+.meta-card h2 {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #486072;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.meta-card p {
+  margin: 0.45rem 0 0;
+  font-size: 1.05rem;
+}
+
+.notes,
+.panel {
+  margin-top: 1.2rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+}
+
+.notes h2,
+.panel h2 {
+  margin: 0 0 0.55rem;
+}
+
+.notes ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.panel p {
+  margin-top: 0;
+}
+
+img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  padding: 0.55rem 0.45rem;
+}
+
+th {
+  background: var(--accent-soft);
+}
+
+@media (max-width: 760px) {
+  .meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+}
