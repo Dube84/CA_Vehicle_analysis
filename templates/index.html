@@ -4,13 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ page_title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
     <main class="layout">
       <header class="hero">
+        <div class="hero-eyebrow">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          California Vehicle Dataset
+        </div>
         <h1>{{ page_title }}</h1>
-        <p class="subtitle">Trend dashboard for fuel economy, engine size, and body style.</p>
+        <p class="subtitle">Trend dashboard — fuel economy, engine size, body style &amp; diesel trends over time.</p>
         <div class="meta-grid">
           <article class="meta-card">
             <h2>Dataset</h2>
@@ -22,13 +32,20 @@
           </article>
           <article class="meta-card">
             <h2>Year Range</h2>
-            <p>{{ year_min }} to {{ year_max }}</p>
+            <p>{{ year_min }} &ndash; {{ year_max }}</p>
           </article>
         </div>
       </header>
 
       <section class="notes">
-        <h2>Scope Clarifications</h2>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="8" stroke-width="3"/><path d="M12 12v4"/>
+            </svg>
+          </span>
+          <h2>Scope Clarifications</h2>
+        </div>
         <ul>
           {% for note in notes %}
           <li>{{ note }}</li>
@@ -37,27 +54,54 @@
       </section>
 
       <section class="panel">
-        <h2>Fuel Economy Change Over Years</h2>
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 22V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M3 22h11"/><path d="M14 9h2a2 2 0 0 1 2 2v3a2 2 0 0 0 4 0V9.83a2 2 0 0 0-.59-1.42L19 6"/>
+            </svg>
+          </span>
+          <h2>Fuel Economy Over Time</h2>
+        </div>
         <p>
           Average combined fuel economy changed from
-          <strong>{{ "%.2f"|format(fuel_details.start_value) }}</strong> MPG in {{ fuel_details.start_year }}
-          to <strong>{{ "%.2f"|format(fuel_details.end_value) }}</strong> MPG in {{ fuel_details.end_year }}.
+          <strong>{{ "%.2f"|format(fuel_details.start_value) }} MPG</strong> in {{ fuel_details.start_year }}
+          to <strong>{{ "%.2f"|format(fuel_details.end_value) }} MPG</strong> in {{ fuel_details.end_year }}.
         </p>
         <img src="data:image/png;base64,{{ fuel_chart }}" alt="Fuel economy trend chart" />
       </section>
 
       <section class="panel">
-        <h2>Engine Size Change Over Years</h2>
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </span>
+          <h2>Engine Size Over Time</h2>
+        </div>
         <p>
           Average engine displacement moved from
-          <strong>{{ "%.2f"|format(engine_details.start_value) }}</strong>L in {{ engine_details.start_year }}
-          to <strong>{{ "%.2f"|format(engine_details.end_value) }}</strong>L in {{ engine_details.end_year }}.
+          <strong>{{ "%.2f"|format(engine_details.start_value) }}L</strong> in {{ engine_details.start_year }}
+          to <strong>{{ "%.2f"|format(engine_details.end_value) }}L</strong> in {{ engine_details.end_year }}.
         </p>
         <img src="data:image/png;base64,{{ engine_chart }}" alt="Engine size trend chart" />
       </section>
 
       <section class="panel">
-        <h2>Body Style Mix Over Years</h2>
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="16" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2"/>
+              <rect x="7" y="14" width="10" height="6" rx="1"/>
+              <circle cx="7.5" cy="17.5" r="1.5"/>
+              <circle cx="16.5" cy="17.5" r="1.5"/>
+            </svg>
+          </span>
+          <h2>Body Style Mix Over Time</h2>
+        </div>
         <p>
           In {{ body_details.latest_year }}, the leading body style among the top tracked groups is
           <strong>{{ body_details.leading_style }}</strong>.
@@ -66,40 +110,78 @@
       </section>
 
       <section class="panel">
-        <h2>Body Style Engine Displacement Trends</h2>
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </span>
+          <h2>Engine Displacement by Body Style</h2>
+        </div>
         <p>
-          This chart tracks average engine displacement over time for the largest body-style groups:
-          <strong>{{ body_displ_details.tracked_styles }}</strong>.
-          In {{ body_displ_details.latest_year }}, the highest average displacement among these lines is
+          Tracked styles: <strong>{{ body_displ_details.tracked_styles }}</strong>.
+          In {{ body_displ_details.latest_year }}, the highest average displacement belongs to
           <strong>{{ body_displ_details.highest_style }}</strong>.
         </p>
         <img src="data:image/png;base64,{{ body_displ_chart }}" alt="Body style displacement trend lines" />
       </section>
 
       <section class="panel">
-        <h2>Five-Year Snapshots</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Year</th>
-              <th>Avg Combined MPG</th>
-              <th>Avg Engine Size (L)</th>
-              <th>Top Body Style</th>
-              <th>Rows</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for row in snapshots %}
-            <tr>
-              <td>{{ row.year }}</td>
-              <td>{{ row.avg_mpg }}</td>
-              <td>{{ row.avg_displ }}</td>
-              <td>{{ row.top_style }}</td>
-              <td>{{ row.sample }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="12" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C6 2 2 8 2 13a10 10 0 0 0 20 0c0-5-4-11-10-11z"/>
+            </svg>
+          </span>
+          <h2>Diesel Share Over Time</h2>
+        </div>
+        <p>
+          Diesel vehicles accounted for <strong>{{ fuel_type_details.start_share }}%</strong> in {{ fuel_type_details.start_year }}
+          and <strong>{{ fuel_type_details.end_share }}%</strong> in {{ fuel_type_details.end_year }}.
+          Peak diesel share: <strong>{{ fuel_type_details.peak_share }}%</strong> in {{ fuel_type_details.peak_year }}.
+        </p>
+        <img src="data:image/png;base64,{{ fuel_type_chart }}" alt="Diesel share by year chart" />
+      </section>
+
+      <section class="panel">
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M3 15h18M9 3v18"/>
+            </svg>
+          </span>
+          <h2>Five-Year Snapshots</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Avg MPG</th>
+                <th>Avg Engine (L)</th>
+                <th>Top Body Style</th>
+                <th>Rows</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in snapshots %}
+              <tr>
+                <td>{{ row.year }}</td>
+                <td>{{ row.avg_mpg }}</td>
+                <td>{{ row.avg_displ }}</td>
+                <td>{{ row.top_style }}</td>
+                <td>{{ row.sample }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </section>
     </main>
   </body>
