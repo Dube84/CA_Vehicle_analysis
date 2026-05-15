@@ -36,6 +36,133 @@ body {
   padding: 0 0 4rem;
 }
 
+/* ── NAV ──────────────────────────────────────────── */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.85rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav-link:hover {
+  color: var(--ink);
+  background: var(--surface-raised);
+}
+
+.nav-link--active {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ── ABOUT PAGE ───────────────────────────────────── */
+.about-list {
+  padding-left: 1.4rem;
+  color: var(--ink-muted);
+  line-height: 1.85;
+}
+
+.about-list li {
+  margin-bottom: 0.3rem;
+}
+
+.about-list strong {
+  color: var(--ink);
+}
+
+.findings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.finding-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem 1.2rem;
+}
+
+.finding-card h3 {
+  margin: 0.3rem 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.finding-card p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+.finding-direction {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.finding-card--up {
+  border-top: 2px solid #34d399;
+}
+
+.finding-card--up .finding-direction {
+  color: #34d399;
+}
+
+.finding-card--down {
+  border-top: 2px solid var(--accent);
+}
+
+.finding-card--down .finding-direction {
+  color: var(--accent);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tech-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+}
+
+.tech-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.tech-card p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
 /* ── HERO ─────────────────────────────────────────── */
 .hero {
   position: relative;

@@ -11,6 +11,22 @@
   </head>
   <body>
     <main class="layout">
+      <nav class="site-nav">
+        <a href="{{ url_for('index') }}" class="nav-link nav-link--active">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 22V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M3 22h11"/>
+            <path d="M14 9h2a2 2 0 0 1 2 2v3a2 2 0 0 0 4 0V9.83a2 2 0 0 0-.59-1.42L19 6"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="{{ url_for('about') }}" class="nav-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          About
+        </a>
+      </nav>
+
       <header class="hero">
         <div class="hero-eyebrow">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">

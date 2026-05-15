@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page_title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="layout">
+      <nav class="site-nav">
+        <a href="{{ url_for('index') }}" class="nav-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 22V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M3 22h11"/>
+            <path d="M14 9h2a2 2 0 0 1 2 2v3a2 2 0 0 0 4 0V9.83a2 2 0 0 0-.59-1.42L19 6"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="{{ url_for('about') }}" class="nav-link nav-link--active">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          About
+        </a>
+      </nav>
+
+      <header class="hero">
+        <div class="hero-eyebrow">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          Project Overview
+        </div>
+        <h1>{{ page_title }}</h1>
+        <p class="subtitle">Background, methodology, and technical details behind the California Vehicle Analysis dashboard.</p>
+        <div class="meta-grid">
+          <article class="meta-card">
+            <h2>Dataset</h2>
+            <p>{{ dataset_name }}</p>
+          </article>
+          <article class="meta-card">
+            <h2>Total Records</h2>
+            <p>{{ rows }} rows</p>
+          </article>
+          <article class="meta-card">
+            <h2>Year Range</h2>
+            <p>{{ year_min }} &ndash; {{ year_max }}</p>
+          </article>
+          <article class="meta-card">
+            <h2>Unique Makes</h2>
+            <p>{{ num_makes }}</p>
+          </article>
+          <article class="meta-card">
+            <h2>Unique Models</h2>
+            <p>{{ num_models }}</p>
+          </article>
+        </div>
+      </header>
+
+      <section class="panel">
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+          </span>
+          <h2>About Me</h2>
+        </div>
+        <p>
+          I am a high school student with a strong interest in cars and the automotive market.
+          Outside of school, I follow industry news around new vehicle releases, electric vehicles,
+          and how consumer preferences are shifting. This project gave me the chance to combine that
+          personal interest with data analysis to answer a question I genuinely care about: how has
+          the car market actually changed over the last 40 years?
+        </p>
+      </section>
+
+      <section class="panel">
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+          </span>
+          <h2>Project Goals</h2>
+        </div>
+        <p>
+          The objective behind this project was to analyse real-world vehicle data to identify
+          meaningful trends in the kinds of cars people drive. Specifically, I wanted to explore
+          how fuel economy, engine size, body style popularity, and fuel type have changed over time.
+        </p>
+        <p>
+          I used the dataset titled <strong>"Vehicle Fuel Economy,"</strong> which includes statistics
+          from every vehicle configuration registered in California from 1984&ndash;2015. It covers
+          fuel type, engine displacement, vehicle class, combined MPG, and more. I processed and
+          visualised this data using <strong>Python</strong>, <strong>pandas</strong>,
+          <strong>Matplotlib</strong>, and <strong>Claude</strong> as an AI assistant throughout
+          development.
+        </p>
+      </section>
+
+      <section class="panel">
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </span>
+          <h2>Key Findings</h2>
+        </div>
+        <p>
+          After analysing the full dataset, four major trends stood out clearly across the 30-year period.
+        </p>
+        <div class="findings-grid">
+          <div class="finding-card finding-card--up">
+            <div class="finding-direction">&#8593; Rising</div>
+            <h3>Fuel Economy (MPG)</h3>
+            <p>Average combined MPG has risen steadily, driven by improvements in engine efficiency,
+            the growth of hybrids, and tighter emissions regulations over the decades.</p>
+          </div>
+          <div class="finding-card finding-card--up">
+            <div class="finding-direction">&#8593; Rising</div>
+            <h3>SUV Market Share</h3>
+            <p>Sport Utility Vehicles have grown from a niche segment to the dominant body style,
+            gradually overtaking sedans and wagons as the most popular vehicle choice.</p>
+          </div>
+          <div class="finding-card finding-card--down">
+            <div class="finding-direction">&#8595; Declining</div>
+            <h3>Average Engine Size</h3>
+            <p>Mean engine displacement has trended downward as turbocharged small-displacement
+            engines and electrified powertrains replaced large naturally-aspirated motors.</p>
+          </div>
+          <div class="finding-card finding-card--down">
+            <div class="finding-direction">&#8595; Declining</div>
+            <h3>Sedan Market Share</h3>
+            <p>Cars and sedans have been steadily phased out of the mainstream market, losing
+            ground to SUVs and crossovers throughout the dataset's time range.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+            </svg>
+          </span>
+          <h2>Predictions</h2>
+        </div>
+        <p>
+          Based on the trends observed in the data, here is what I expect to see over the next four years:
+        </p>
+        <ul class="about-list">
+          <li>
+            <strong>MPG will keep climbing</strong> — The push for better fuel efficiency, combined
+            with the growing adoption of electric and hybrid vehicles, will continue to lift the
+            average combined MPG figure year on year.
+          </li>
+          <li>
+            <strong>Engine sizes will keep shrinking</strong> — As EVs and plug-in hybrids take a
+            larger slice of new vehicle sales, average engine displacement will fall further. Even
+            among combustion vehicles, downsized turbocharged engines are now the norm.
+          </li>
+          <li>
+            <strong>SUVs will dominate even more</strong> — Consumer preference has clearly shifted
+            toward SUVs and crossovers. I expect this trend to accelerate, with SUVs accounting for
+            an ever-larger share of new vehicle configurations.
+          </li>
+          <li>
+            <strong>Sedans will continue to be phased out</strong> — Several major manufacturers
+            have already reduced or eliminated their sedan line-ups. This trend is unlikely to reverse
+            in the near term.
+          </li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+            </svg>
+          </span>
+          <h2>Dataset</h2>
+        </div>
+        <p>
+          The dataset (<strong>{{ dataset_name }}</strong>) is a CSV file containing one row per vehicle
+          configuration entry. Key columns used in this project include:
+        </p>
+        <ul class="about-list">
+          <li><strong>year</strong> — Model year of the vehicle configuration.</li>
+          <li><strong>make / model</strong> — Manufacturer and model name.</li>
+          <li><strong>VClass</strong> — EPA vehicle class label, used to derive a simplified body style category.</li>
+          <li><strong>comb08</strong> — Combined fuel economy rating in MPG (or MPGe for electric vehicles).</li>
+          <li><strong>displ</strong> — Engine displacement in litres.</li>
+          <li><strong>fuelType1</strong> — Primary fuel type, used to identify diesel vehicles.</li>
+        </ul>
+        <p>
+          Each row represents a distinct vehicle <em>configuration</em> (make, model, trim, and powertrain
+          combination), not a registration count or sales figure. Aggregate statistics therefore reflect
+          the diversity of configurations available in each model year rather than fleet volumes.
+        </p>
+      </section>
+
+      <section class="panel">
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </span>
+          <h2>Methodology</h2>
+        </div>
+        <p>The dashboard builds four trend charts and one summary table:</p>
+        <ul class="about-list">
+          <li>
+            <strong>Fuel Economy Over Time</strong> — Annual mean of <code>comb08</code> (rows with missing
+            values are excluded).
+          </li>
+          <li>
+            <strong>Engine Size Over Time</strong> — Annual mean of <code>displ</code>, restricted to rows
+            where displacement is greater than zero.
+          </li>
+          <li>
+            <strong>Body Style Mix</strong> — <code>VClass</code> values are mapped to six simplified
+            categories (Car, SUV, Pickup Truck, Van, Wagon, Special Purpose). The top five categories
+            by total count are shown as stacked area shares per year.
+          </li>
+          <li>
+            <strong>Engine Displacement by Body Style</strong> — Annual mean displacement for each of the
+            top five body style categories, plotted as separate trend lines.
+          </li>
+          <li>
+            <strong>Diesel Share Over Time</strong> — Percentage of configurations whose <code>fuelType1</code>
+            contains the word "diesel" (case-insensitive), calculated per model year.
+          </li>
+          <li>
+            <strong>Five-Year Snapshots</strong> — Aggregated statistics (average MPG, average engine size,
+            leading body style, and row count) for every fifth model year in the dataset.
+          </li>
+        </ul>
+        <p>
+          Data cleaning is performed at load time: numeric columns are coerced with
+          <code>pd.to_numeric(errors="coerce")</code> so that non-numeric entries become
+          <code>NaN</code> and are automatically excluded from aggregations.
+        </p>
+      </section>
+
+      <section class="panel">
+        <div class="accent-stripe"></div>
+        <div class="panel-header">
+          <span class="panel-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </span>
+          <h2>Technologies</h2>
+        </div>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <h3>Python</h3>
+            <p>Core language used for data processing, analysis, and server-side logic.</p>
+          </div>
+          <div class="tech-card">
+            <h3>pandas</h3>
+            <p>Data loading, cleaning, grouping, and aggregation of the vehicle CSV dataset.</p>
+          </div>
+          <div class="tech-card">
+            <h3>Matplotlib</h3>
+            <p>Chart generation. Figures are rendered server-side and embedded as Base64 PNG images.</p>
+          </div>
+          <div class="tech-card">
+            <h3>Flask</h3>
+            <p>Lightweight web framework serving the dashboard and about pages via Jinja2 templates.</p>
+          </div>
+          <div class="tech-card">
+            <h3>HTML &amp; CSS</h3>
+            <p>Custom dark-themed front-end using CSS custom properties, grid layout, and Google Fonts.</p>
+          </div>
+          <div class="tech-card">
+            <h3>Jinja2</h3>
+            <p>Templating engine for injecting Python data and chart images into HTML pages.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
