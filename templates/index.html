@@ -36,7 +36,28 @@
           California Vehicle Dataset
         </div>
         <h1>{{ page_title }}</h1>
-        <p class="subtitle">Trend dashboard — fuel economy, engine size, body style &amp; diesel trends over time.</p>
+        <p class="subtitle">
+          Trend dashboard — fuel economy, engine size, body style &amp; diesel trends over time.
+          {% if selected_make %}
+          Currently viewing: <strong>{{ selected_make }}</strong>.
+          {% else %}
+          Currently viewing: <strong>All manufacturers</strong>.
+          {% endif %}
+        </p>
+
+        <form class="filter-form" method="get" action="{{ url_for('index') }}">
+          <label for="make">Make / Manufacturer</label>
+          <div class="filter-controls">
+            <select id="make" name="make" onchange="this.form.submit()">
+              <option value="" {% if not selected_make %}selected{% endif %}>All manufacturers</option>
+              {% for make in make_options %}
+              <option value="{{ make }}" {% if selected_make == make %}selected{% endif %}>{{ make }}</option>
+              {% endfor %}
+            </select>
+            <button type="submit">Apply</button>
+          </div>
+        </form>
+
         <div class="meta-grid">
           <article class="meta-card">
             <h2>Dataset</h2>

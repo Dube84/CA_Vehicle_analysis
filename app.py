@@ -37,7 +37,7 @@ mpl.rcParams.update({
         color=["#60a5fa", "#f472b6", "#34d399", "#fbbf24", "#a78bfa", "#fb923c"]
     ),
 })
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 
 app = Flask(__name__)
@@ -263,9 +263,45 @@ def five_year_snapshot(df: pd.DataFrame) -> list[dict[str, str]]:
     return rows
 
 
+@app.route("/about")
+def about() -> str:
+    df = load_data()
+    return render_template(
+        "about.html",
+        page_title="About This Project",
+        dataset_name=DATA_PATH.name,
+        rows=f"{len(df):,}",
+        year_min=int(df["year"].min()),
+        year_max=int(df["year"].max()),
+        num_makes=df["make"].nunique() if "make" in df.columns else "N/A",
+        num_models=df["model"].nunique() if "model" in df.columns else "N/A",
+    )
+
+
 @app.route("/")
 def index() -> str:
-    df = load_data()
+    full_df = load_data()
+
+    if "make" in full_df.columns:
+        top_make_counts = (
+            full_df["make"]
+            .dropna()
+            .astype(str)
+            .str.strip()
+            .loc[lambda series: series.ne("")]
+            .value_counts()
+            .head(13)
+        )
+        make_options = top_make_counts.index.tolist()
+    else:
+        make_options = []
+
+    selected_make = request.args.get("make", "").strip()
+    if selected_make and selected_make in make_options:
+        df = full_df[full_df["make"] == selected_make].copy()
+    else:
+        selected_make = ""
+        df = full_df
 
     fuel_chart, fuel_details = build_fuel_economy_chart(df)
     engine_chart, engine_details = build_engine_size_chart(df)
@@ -276,11 +312,17 @@ def index() -> str:
     context = {
         "page_title": "Vehicles in California Analysis",
         "dataset_name": DATA_PATH.name,
+        "selected_make": selected_make,
+        "make_options": make_options,
         "rows": f"{len(df):,}",
         "year_min": int(df["year"].min()),
         "year_max": int(df["year"].max()),
         "notes": [
-            "This dashboard is scoped to the full California dataset provided for this project.",
+            (
+                f"Current scope is filtered to make: {selected_make}."
+                if selected_make
+                else "This dashboard is scoped to the full California dataset provided for this project."
+            ),
             "Results summarize all rows in that California dataset rather than a single city or county subset.",
             "Each row is a vehicle configuration entry, not registration or sales volume.",
             "Fuel economy values are combined MPG/MPGe from the source dataset.",
